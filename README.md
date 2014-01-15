@@ -44,6 +44,45 @@ En la máquina anfitriona:
 
 Crear imágenes con estos formatos (y otros que se encuentren tales como VMDK) y manipularlas a base de montarlas o con cualquier otra utilidad que se encuentre.
 
+Vamos a probar los diferentes tipos de imágenes que soporta [QEMU] (http://en.wikibooks.org/wiki/QEMU/Images).
+Todos pueden ser generados con el formato:
+
+    qemu-img create -f [FORMATO] [NOMBRE_ARCHIVO] [TAMAÑO]
+
+por ejemplo:
+
+    raw: qemu-img create -f raw imagen-raw.img 100M
+    vdi: qemu-img create -f vdi imagen-vdi.vdi 100M
+    qcow2: qemu-img create -f qcow2 imagen-qcow2.qcow2 100M
+    vmdk: qemu-img create -f vmdk imagen-vmdk.vmdk 100M
+    
+![imagen2](https://dl.dropbox.com/s/p1568eq0rcs05qd/ej3_1.png)
+
+Una vez creados estos ficheros vamos a montarlos, aunque nos dará un error al hacerlo ya que no tienen ningún formato.
+
+    sudo mount -o loop,offset=32256 fichero-raw.img /mnt/misImagenes
+
+
+    sudo modprobe nbd max_part=16
+    sudo qemu-nbd -c /dev/nbd1 fichero-raw.img 
+    sudo partprobe /dev/nbd1
+    sudo mount /dev/nbd1 /mnt/misImagenes
+
+En ambos casos obtenemos el siguiente error: mount: debe especificar el tipo de sistema de archivos.
+
+Para que funcione correctamente primero debemos convertir cada fichero en un dispositivo loop con losetup, formatearlo usando alguna de estas herramientas: fdisk, mkfs, gpartedy y una vez formateado ya podemos montar el dispositivo:
+
+    sudo losetup -v -f imagen-vmdk.vmdk
+    sudo mkfs.ext4 /dev/loop1
+    sudo mount /dev/loop2 /mnt/images
+    
+Aqui vemos el resultado con la orden: 
+
+    df -h 
+    
+![imagen3](https://dl.dropbox.com/s/q9eaa856hc3jqzv/ej3_2.png)
+
+
 ### Ejercicio 4
 
 Crear uno o varios sistema de ficheros en bucle usando un formato que no sea habitual (xfs o btrfs) y comparar las prestaciones de entrada/salida entre sí y entre ellos y el sistema de ficheros en el que se encuentra, para comprobar el overhead que se añade mediante este sistema
