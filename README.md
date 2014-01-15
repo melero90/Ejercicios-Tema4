@@ -85,11 +85,48 @@ Aqui vemos el resultado con la orden:
 
 ### Ejercicio 4
 
-Crear uno o varios sistema de ficheros en bucle usando un formato que no sea habitual (xfs o btrfs) y comparar las prestaciones de entrada/salida entre sí y entre ellos y el sistema de ficheros en el que se encuentra, para comprobar el overhead que se añade mediante este sistema
+Crear uno o varios sistema de ficheros en bucle usando un formato que no sea habitual (xfs o btrfs) y comparar las prestaciones de entrada/salida entre sí y entre ellos y el sistema de ficheros en el que se encuentra, para comprobar el overhead que se añade mediante este sistema.
+
+Creamos, como en el ejercicio anterior, dos sistemas de ficheros; uno con formato xfs y otro con formato btrfs:
+
+    qemu-img create -f raw fichero-xfs.img 100M
+    qemu-img create -f raw fichero-btrfs.img 100M
+
+Con el comando losetup convertimos cada fichero en ficheros loop:
+
+    sudo losetup -v -f fichero-xfs.img
+    sudo losetup -v -f fichero-btrfs.img
+    
+![imagen4](https://dl.dropbox.com/s/44b0fg1eb5gljlr/ejercicio4_1.png)
+
+Instalar xfs y btrfs:
+
+    sudo apt-get install xfs xfsprogs
+    sudo apt-get install btrfs-tools
+    
+Ahora le asignamos formato a cada uno:
+
+    sudo mkfs.xfs /dev/loop2
+    sudo mkfs.btrfs /dev/loop3
+
+Ahora ya si, podemos montarlos:
+
+    sudo mount /dev/loop2 /mnt/loop2
+    sudo mount /dev/loop3 /mnt/loop3
+    
+![imagen6](https://dl.dropbox.com/s/m4v5yj64hgrrqkl/ejercicio4_2.png)
+
+Comprobamos que los dos dispositivos se han montado correctamente:
+
+![imagen5](https://dl.dropbox.com/s/xi7scq4wzdzgogw/ejercicio4_3.png)
 
 ### Ejercicio 5
 
 Instalar ceph en tu sistema operativo.
+
+Escribimos la siguiente orden:
+
+    sudo apt-get install ceph-mds
 
 ### Ejercicio 6
 
