@@ -40,27 +40,34 @@ En la máquina anfitriona:
     -sshfs alumno_iv@10.0.3.137:/home /home/antoniomelero/directorio_remoto
 
 
-
 ### Ejercicio 3
 
+Crear imágenes con estos formatos (y otros que se encuentren tales como VMDK) y manipularlas a base de montarlas o con cualquier otra utilidad que se encuentre.
 
 ### Ejercicio 4
 
+Crear uno o varios sistema de ficheros en bucle usando un formato que no sea habitual (xfs o btrfs) y comparar las prestaciones de entrada/salida entre sí y entre ellos y el sistema de ficheros en el que se encuentra, para comprobar el overhead que se añade mediante este sistema
 
 ### Ejercicio 5
 
+Instalar ceph en tu sistema operativo.
 
 ### Ejercicio 6
 
+Crear un dispositivo ceph usando BTRFS o XFS. Avanzado Usar varios dispositivos en un nodo para distribuir la carga.
 
 ### Ejercicio 7
 
+Almacenar objetos y ver la forma de almacenar directorios completos usando ceph y rados.
 
 ### Ejercicio 8
 
+Tras crear la cuenta de Azure, instalar las herramientas de línea de órdenes (Command line interface, cli) del mismo y configurarlas con la cuenta Azure correspondiente
 
 ### Ejercicio 9
 
-
+Crear varios contenedores en la cuenta usando la línea de órdenes para ficheros de diferente tipo y almacenar en ellos las imágenes en las que capturéis las pantallas donde se muestre lo que habéis hecho.
 
 ### Ejercicio 10
+
+Desde un programa en Ruby o en algún otro lenguaje, listar los blobs que hay en un contenedor, crear un fichero con la lista de los mismos y subirla al propio contenedor. Muy meta todo.
