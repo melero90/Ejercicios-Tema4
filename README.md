@@ -147,9 +147,9 @@ Para poder instalar Azure debemos tener instalado en nuestro ordenador la librer
     sudo add-apt-repository -y ppa:chris-lea/node.js
     sudo apt-get update
     
-![t4ej81](imagen)
+![t4ej81](https://dl.dropbox.com/s/puhhpozzrk6w23c/t4ej8_1.png)
 
-![t4ej82](imagen)
+![t4ej82](https://dl.dropbox.com/s/rw3t5ceju2hb16y/t4ej8_2.png)
 
 El siguiente paso es instalar la librería node.js:
 
@@ -159,13 +159,36 @@ Cuando la librería se haya instalado ya podemos instalar windows azure de la si
 
     npm install azure-cli
 
-![t4ej83](imagen)
+![t4ej83](https://dl.dropbox.com/s/o1p4unugbhlpvff/t4_ej8_3.png)
 
-![t4ej84](imagen)
+![t4ej84](https://dl.dropbox.com/s/pgv2n76jgbwpe0r/t4_ej8_4.png)
 
+Terminado de instalar azure debemos realizar la configuración para nuestra cuenta:
 
+    azure account download
 
+Esto abrirá el navegador predeterminado con una dirección. Iniciamos nuestra sesión y automáticamente se descarga un archivo de configuración ***publishsettings***
 
+A continuación, importamos el archivo publishsettings ejecutando el siguiente comando:
+
+    azure account import /Escritorio/IV/Azpad4533FS1912-1-11-2014-credentials.publishsettings
+
+Podemos comprobar que nuestra cuenta se ha creado correctamento ejecutando el comando:
+
+    azure account list
+
+Ya podemos crear una cuenta de almacenamiento. Elegimos West Europe como ubicación:
+
+    azure account storage create melero90
+
+Generamos claves:
+
+    azure account storage keys list melero90
+
+Establecemos nuestras claves con la orden export de la siguiente manera y ya tenemos creada y configurada nuestra cuenta en Azure.
+
+    export AZURE_STORAGE_ACCOUNT=melero90
+    export AZURE_STORAGE_ACCESS_KEY=...==
 
 ### Ejercicio 9
 
