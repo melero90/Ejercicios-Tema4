@@ -197,3 +197,39 @@ Crear varios contenedores en la cuenta usando la línea de órdenes para fichero
 ### Ejercicio 10
 
 Desde un programa en Ruby o en algún otro lenguaje, listar los blobs que hay en un contenedor, crear un fichero con la lista de los mismos y subirla al propio contenedor. Muy meta todo.
+
+Antes de escribir el programa debemos instalar la gema para azure:
+
+    sudo gem install azure
+
+Programa en Ruby:
+
+        #!/usr/bin/ruby
+        require "azure"
+    
+        azure_blob_service = Azure::BlobService.new
+    
+        contenedores=azure_blob_service.list_containers()
+    
+        #Recorremos cada contenedor
+        contenedores.each do |contenedor|
+    
+        #Por cada contenedor creamos un ".txt" con su nombre
+        fichero = contenedor.name + ".txt"    
+    
+        #Abrimos el fichero creado en modo escritura
+        File.open(fichero, "w") do |i|
+            #Almacenamos en el su nombre y cada blob que contiene dentro
+            i.puts "El nombre del fichero es: " + contenedor.name + " que contiene los siguientes blobs:"
+    
+            blobs=azure_blob_service.list_blobs(contenedor.name)
+    
+            blobs.each do |blob|
+                i.puts " * " + blob.name
+            end
+        end
+    
+        #Por último subimos el fichero al contenedor
+        content = File.open(fichero, "rb") { |file| file.read }
+        blob = azure_blob_service.create_block_blob(contenedor.name, fichero, content)
+    end
