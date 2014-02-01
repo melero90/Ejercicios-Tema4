@@ -132,6 +132,51 @@ Escribimos la siguiente orden:
 
 Crear un dispositivo ceph usando BTRFS o XFS. Avanzado Usar varios dispositivos en un nodo para distribuir la carga.
 
+Creamos los directorios donde se almacena la información ceph:
+
+    sudo mkdir -p /srv/ceph/{osd,mon,mds}
+
+Archivo de configuración ceph.conf:
+
+    [global]
+    auth cluster required = none
+    auth service required = none
+    auth client required = none
+    auth supported = none
+    log file = /var/log/ceph/$name.log
+    pid file = /var/run/ceph/$name.pid
+    [mon]
+    mon data = /srv/ceph/mon/$name
+    [mon.gpc]
+    host = melero-Lenovo-IdeaPad-Z500
+    mon addr = 127.0.0.1:6789
+    [mds]
+    [mds.gpc]
+    host = melero-Lenovo-IdeaPad-Z500
+    [osd]
+    osd data = /srv/ceph/osd/$name
+    osd journal = /srv/ceph/osd/$name/journal
+    osd journal size = 1000
+    [osd.0]
+    host = melero-Lenovo-IdeaPad-Z500
+    xfs devs = /dev/loop5
+    
+Creo el directorio a mano como dice el ejemplo:
+
+    sudo mkdir /srv/ceph/osd/osd.0
+    
+Para comprobar que funciona ceph:
+
+![imagen](https://dl.dropbox.com/s/sqh1geefwiudrml/t4ej6_1.png)
+
+Y creo el sistema de ficheros de objetos:
+
+    sudo /sbin/mkcephfs -a -c /etc/ceph/ceph.conf
+    
+Siguiente error:
+
+![imagen](https://dl.dropbox.com/s/nxy0022vqiwp8dd/t4ej6.png)   
+
 ### Ejercicio 7
 
 Almacenar objetos y ver la forma de almacenar directorios completos usando ceph y rados.
