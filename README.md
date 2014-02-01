@@ -138,7 +138,34 @@ Almacenar objetos y ver la forma de almacenar directorios completos usando ceph 
 
 ### Ejercicio 8
 
-Tras crear la cuenta de Azure, instalar las herramientas de línea de órdenes (Command line interface, cli) del mismo y configurarlas con la cuenta Azure correspondiente
+Tras crear la cuenta de Azure, instalar las herramientas de línea de órdenes (Command line interface, cli) del mismo y configurarlas con la cuenta Azure correspondiente.
+
+Para poder instalar Azure debemos tener instalado en nuestro ordenador la librería node.js. La añadimos instalando los repositorios de la siguiente forma:
+
+    sudo apt-get update
+    sudo apt-get install -y python-software-properties python g++ make
+    sudo add-apt-repository -y ppa:chris-lea/node.js
+    sudo apt-get update
+    
+![t4ej81](imagen)
+
+![t4ej82](imagen)
+
+El siguiente paso es instalar la librería node.js:
+
+    sudo apt-get install nodejs
+
+Cuando la librería se haya instalado ya podemos instalar windows azure de la siguiente forma:
+
+    npm install azure-cli
+
+![t4ej83](imagen)
+
+![t4ej84](imagen)
+
+
+
+
 
 ### Ejercicio 9
 
